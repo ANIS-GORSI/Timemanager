@@ -1,2 +1,0 @@
-# Timemanager
-Moodle Plugin Project
