@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/timemanager/db" VERSION="20250101" COMMENT="XMLDB file for Moodle local/timemanager"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_timemanager" COMMENT="Stores time management tasks and assignments">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="User ID"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Course ID"/>
+        <FIELD NAME="taskname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Task name"/>
+        <FIELD NAME="tasktype" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT="Task type: assignment, quiz, forum, etc"/>
+        <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Start date timestamp"/>
+        <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Due date timestamp"/>
+        <FIELD NAME="estimatedeffort" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Estimated effort in hours"/>
+        <FIELD NAME="notified_start" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Whether start date notification was sent"/>
+        <FIELD NAME="notified_upcoming" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Whether upcoming deadline notification was sent"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="startdate" UNIQUE="false" FIELDS="startdate"/>
+        <INDEX NAME="duedate" UNIQUE="false" FIELDS="duedate"/>
+        <INDEX NAME="notified_start" UNIQUE="false" FIELDS="notified_start"/>
+        <INDEX NAME="notified_upcoming" UNIQUE="false" FIELDS="notified_upcoming"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
